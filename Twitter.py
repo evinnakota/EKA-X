@@ -1,4 +1,5 @@
 from User import User
+from Post import Post
 
 
 class Twitter():
@@ -36,8 +37,9 @@ def main():
             print("\nNot logged in")
         print("1. Create account")
         print("2. Log in")
-        print("3. View accounts")
-        print("4. Quit")
+        print ("3. Create post")
+        print("4. View accounts")
+        print("5. Quit")
         choice = input("Choose an option: ").strip()
 
         if choice == "1":
@@ -58,6 +60,15 @@ def main():
                 print("Login failed.")
 
         elif choice == "3":
+            if twitter.current_user is not None:
+                post_text = input("what are your thoughts?: ")
+                new_post = Post(twitter.current_user.username, post_text)
+                twitter.current_user.posts.append(new_post)
+            else:
+                print("Please log in before you post! ")
+                continue
+
+        elif choice == "4":
             if not twitter.users:
                 print("There are no accounts yet.")
                 continue
@@ -80,7 +91,7 @@ def main():
             else:
                 print(user.public_info())   # someone else's: hide the password
 
-        elif choice == "4":
+        elif choice == "5":
             print("Goodbye!")
             break
 
