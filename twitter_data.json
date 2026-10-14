@@ -1,0 +1,18 @@
+{
+    "alice": {
+        "password": "a",
+        "followers": [],
+        "following": [
+            "bob"
+        ],
+        "posts": []
+    },
+    "bob": {
+        "password": "b",
+        "followers": [
+            "alice"
+        ],
+        "following": [],
+        "posts": []
+    }
+}

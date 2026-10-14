@@ -10,20 +10,36 @@ class User():
         """Return True if the given password matches this user's password."""
         return self.password == password
 
+    
     def public_info(self):
-        """Return the user's details without the password (for viewing other accounts)."""
         return (f"Username: {self.username}\n"
-                f"Followers: {self.followers}\n"
-                f"Following: {self.following}\n"
+                f"Followers: {[user.username for user in self.followers]}\n"
+                f"Following: {[user.username for user in self.following]}\n"
                 f"Posts: {self.posts}")
+
 
     def show_posts(self):
         for post in self.posts:
             print(post.show_post())
 
+    def follow(self, other_user):
+        if self == other_user:
+            return False
+        if other_user in self.following:
+            return False
+        self.following.append(other_user)
+        other_user.followers.append(self)
+        return True
+
+    def unfollow(self,other_user):
+        if other_user not in self.following:
+            return False
+        self.following.remove(other_user)
+        other_user.followers.remove(self)
+        return True
+
+    def is_following(self, other_user):
+        return other_user in self.following
+
     def __repr__(self):
-        return (f"Username: {self.username}\n"
-                f"Password: {self.password}\n"
-                f"Followers: {self.followers}\n"
-                f"Following: {self.following}\n"
-                f"Posts: {self.posts}")
+            return self.public_info()
