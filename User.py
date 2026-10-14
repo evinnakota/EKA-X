@@ -17,6 +17,10 @@ class User():
                 f"Following: {self.following}\n"
                 f"Posts: {self.posts}")
 
+    def show_posts(self):
+        for post in self.posts:
+            print(post.show_post())
+
     def __repr__(self):
         return (f"Username: {self.username}\n"
                 f"Password: {self.password}\n"
